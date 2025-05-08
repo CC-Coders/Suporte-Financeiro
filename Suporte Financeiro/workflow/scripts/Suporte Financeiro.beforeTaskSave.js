@@ -97,7 +97,7 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
 
 
             log.info("RETORNO = " + retorno.values[0][1]);
-            log.dir(retorno);
+            log.dir(retorno );
 
             if (!retorno || retorno == "" || retorno == null) {
                 throw "Houve um erro na comunicação com o webservice. Tente novamente!";
@@ -740,7 +740,6 @@ function FormataValorInserir(valor) {
 }
 
 function BuscaRemetentes() {
-    return "gabriel.persike@castilho.com.br"
     var usuario = hAPI.getCardValue('usuario');
     var solicitante = hAPI.getCardValue('solicitante');
     var emailsCopia = hAPI.getCardValue("email");
