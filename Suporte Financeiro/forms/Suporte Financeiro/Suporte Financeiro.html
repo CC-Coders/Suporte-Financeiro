@@ -1,713 +1,439 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="/style-guide/css/fluig-style-guide.min.css"
-    />
-    <script
-      type="text/javascript"
-      src="/portal/resources/js/jquery/jquery.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/portal/resources/js/jquery/jquery-ui.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/portal/resources/js/mustache/mustache-min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="/style-guide/js/fluig-style-guide.min.js"
-      charset="utf-8"
-    ></script>
-    <script src="/webdesk/vcXMLRPC.js"></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/style-guide/css/fluig-style-guide-filter.min.css"
-    />
-    <script src="ScriptSuporteFinanceiro.js"></script>
-    <script src="FunctionsSuporteFinan.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <link rel="stylesheet" href="Style.css" />
-    <!--scripts-->
-  </head>
-  <body class="fluig-style-guide">
-    <form
-      enctype=""
-      role="form"
-      method="post"
-      name="form"
-      action=""
-      onsubmit="return false;"
-    >
-      <div id="divCollapse">
-        <ul
-          id="coltabs"
-          class="nav nav-tabs nav-justified nav-pills"
-          role="tablist"
-          style="padding-bottom: 0px; width: 100%"
-        >
-          <li class="collapse-tab active">
-            <a
-              href="#tabInfoChamado"
-              role="tab"
-              id="atabInfoChamado"
-              data-toggle="tab"
-              aria-expanded="true"
-              class="tab"
-              >Informações do Chamado</a
-            >
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="tabInfoChamado">
-            <div class="form-input">
-              <label>Categoria:</label>
-              <strong class="strongAlert">*</strong>
-              <div style="display: flex; width: 100%">
-                <select
-                  list="CategoriaAlteracao"
-                  name="CategoriaAlteracao"
-                  id="CategoriaAlteracao"
-                  class="info-chamado form-control"
-                >
+
+<head>
+  <link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css" />
+  <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+  <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+  <script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+  <script src="/webdesk/vcXMLRPC.js"></script>
+  <link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide-filter.min.css" />
+  <script src="ScriptSuporteFinanceiro.js"></script>
+  <script src="FunctionsSuporteFinan.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <link rel="stylesheet" href="Style.css" />
+  <!--scripts-->
+</head>
+
+<body class="fluig-style-guide">
+  <form enctype="" role="form" method="post" name="form" action="" onsubmit="return false;">
+    <div id="divCollapse">
+      <ul id="coltabs" class="nav nav-tabs nav-justified nav-pills" role="tablist"
+        style="padding-bottom: 0px; width: 100%">
+        <li class="collapse-tab active">
+          <a href="#tabInfoChamado" role="tab" id="atabInfoChamado" data-toggle="tab" aria-expanded="true"
+            class="tab">Informações do Chamado</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tabInfoChamado">
+          <div class="form-input">
+            <label>Categoria:</label>
+            <strong class="strongAlert">*</strong>
+            <div style="display: flex; width: 100%">
+              <select list="CategoriaAlteracao" name="CategoriaAlteracao" id="CategoriaAlteracao"
+                class="info-chamado form-control">
                 <option value=""></option>
                 <option value="Antecipação de Pagamento">Alteração de Data de Pagamento a Fornecedores</option>
                 <option value="Antecipação de Aluguel">Alteração de Data de Pagamento de Aluguel</option>
                 <option value="Adiantamento de Viagem">Adiantamento de Viagem</option>
-                </select>
-                <div></div>
-              </div>
+              </select>
               <div></div>
-              <br />
             </div>
-            <div id="divAntecipaPagamentos" style="display: none">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h3 class="panel-title">
-                        Solicitação para Antecipação de Pagamentos de Notas
-                        Fiscais
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      id="Validada"
-                      style="color: #00c900; display: none"
-                    >
-                      <h3 class="panel-title">
-                        Solicitação Validada pelo Coordenador Operacional
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      id="NaoValidada"
-                      style="color: #830000; display: none"
-                    >
-                      <h3 class="panel-title">
-                        Solicitação Não Validada pelo Coordenador Operacional
-                      </h3>
-                    </div>
+            <div></div>
+            <br />
+          </div>
+          <div id="divAntecipaPagamentos" style="display: none">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="panel-title">
+                      Solicitação para Antecipação de Pagamentos de Notas
+                      Fiscais
+                    </h3>
+                  </div>
+                  <div class="col-md-6" id="Validada" style="color: #00c900; display: none">
+                    <h3 class="panel-title">
+                      Solicitação Validada pelo Coordenador Operacional
+                    </h3>
+                  </div>
+                  <div class="col-md-6" id="NaoValidada" style="color: #830000; display: none">
+                    <h3 class="panel-title">
+                      Solicitação Não Validada pelo Coordenador Operacional
+                    </h3>
                   </div>
                 </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-12 form-input">
-                      <label>Coligada do Lancamento:</label>
-                      <strong class="strongAlert">*</strong>
-                      <select
-                      list="ColigadaLanc"
-                      name="ColigadaLanc"
-                      id="ColigadaLanc"
-                      class="InputPagamentoNotasFiscais form-control"
-                      >
-                        <option value=""></option>
-                        <option value="1">1 - CONSTRUTORA CASTILHO</option>
-                        <option value="2">2 - CASTILHO MINERACAO</option>
-                        <option value="5">5 - CONSORCIO CONSTRUTOR TUNEL ESTACAO LUZ</option>
-                        <option value="6">6 - CONSORCIO CASTILHO - ARTELESTE / MACEIÓ</option>
-                        <option value="8">8 - CONSORCIO CASTILHO - ECAM / PETROLINA</option>
-                        <option value="12">12 - DROMOS INFRA</option>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12 form-input">
+                    <label>Coligada do Lancamento:</label>
+                    <strong class="strongAlert">*</strong>
+                    <select list="ColigadaLanc" name="ColigadaLanc" id="ColigadaLanc"
+                      class="InputPagamentoNotasFiscais form-control">
+                      <option value=""></option>
+                      <option value="1">1 - CONSTRUTORA CASTILHO</option>
+                      <option value="2">2 - CASTILHO MINERACAO</option>
+                      <option value="5">5 - CONSORCIO CONSTRUTOR TUNEL ESTACAO LUZ</option>
+                      <option value="6">6 - CONSORCIO CASTILHO - ARTELESTE / MACEIÓ</option>
+                      <option value="8">8 - CONSORCIO CASTILHO - ECAM / PETROLINA</option>
+                      <option value="12">12 - DROMOS INFRA</option>
                     </select>
                     <div></div>
-                    </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 form-input">
-                      <label
-                        class="popoverDicaIndetificadorLançamento"
-                        data-toggle="popover"
-                        data-content="<div><b>No RM, Referência do Lançamento estará localizada dentro do Labçamento, na parte superior da tela, como indicado na imagem abaixo.</b><img src='http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD03MzAwNTkmdmVyPTEwMDAmZmlsZT1JbWFnZW1SZWZlcmVuY2lhTGFuY2FtZW50by5wbmcmY3JjPTE4MDM4MTY4MDYmc2l6ZT0wLjA0MzQzMyZ1SWQ9MzM3JmZTSWQ9MSZ1U0lkPTEmZD1mYWxzZSZ0a249JnB1YmxpY1VybD10cnVl.png' height='150px' width:'auto'> height='300px' width:'auto'></div>"
-                        data-original-title="Popover title"
-                      >
-                        Referência do Lançamento:
-                        <strong class="strongAlert">*</strong>
-                        <i
-                          class="flaticon flaticon-info icon-sm"
-                          aria-hidden="true"
-                        ></i>
-                      </label>
-                      <input
-                        type="text"
-                        id="IdentificadorMov"
-                        name="IdentificadorMov"
-                        class="form-control InputPagamentoNotasFiscais"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <b>Razão Social:</b>
-                      <span id="spanRazaoSocialAntecipaPagamento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>CNPJ:</b>
-                      <span id="spanCNPJAntecipaPagamento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Clifor:</b>
-                      <span id="spanCliforAntecipaPagamento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Numero Documento:</b>
-                      <span id="spanNumeroDocumentoAntecipaPagamento"></span>
-                      <br />
-                      <br />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <b>Centro De Custo:</b>
-                      <span id="spanCentroDeCustoAntecipaPagamento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Valor:</b>
-                      <span id="spanValorAntecipaPagamento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Tipo de Movimento de Origem: </b>
-                      <span id="spanTipoMovimento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Data Criação: </b>
-                      <span id="spanDataCriaPagam"></span>
-                      <br />
-                      <br />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <b>Data Emissão: </b>
-                      <span id="spanDataEmissPagam"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Diferença entre Entrada e Criação: </b>
-                      <span id="spanDiferncaDatasPagam"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Data Previsão de Baixa: </b>
-                      <span id="spanDataVencimento"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <label for="LabelData">Data para Alteração</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 form-input">
+                    <label class="popoverDicaIndetificadorLançamento" data-toggle="popover"
+                      data-content="<div><b>No RM, Referência do Lançamento estará localizada dentro do Labçamento, na parte superior da tela, como indicado na imagem abaixo.</b><img src='http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD03MzAwNTkmdmVyPTEwMDAmZmlsZT1JbWFnZW1SZWZlcmVuY2lhTGFuY2FtZW50by5wbmcmY3JjPTE4MDM4MTY4MDYmc2l6ZT0wLjA0MzQzMyZ1SWQ9MzM3JmZTSWQ9MSZ1U0lkPTEmZD1mYWxzZSZ0a249JnB1YmxpY1VybD10cnVl.png' height='150px' width:'auto'> height='300px' width:'auto'></div>"
+                      data-original-title="Popover title">
+                      Referência do Lançamento:
                       <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        id="data_alteracao"
-                        name="data_alteracao"
-                        class="data_alteracao form-control InputPagamentoNotasFiscais"
-                        style="color: red"
-                      />
-                    </div>
+                      <i class="flaticon flaticon-info icon-sm" aria-hidden="true"></i>
+                    </label>
+                    <input type="text" id="IdentificadorMov" name="IdentificadorMov"
+                      class="form-control InputPagamentoNotasFiscais" />
+                    <div></div>
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <b>Razão Social:</b>
+                    <span id="spanRazaoSocialAntecipaPagamento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>CNPJ:</b>
+                    <span id="spanCNPJAntecipaPagamento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Clifor:</b>
+                    <span id="spanCliforAntecipaPagamento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Numero Documento:</b>
+                    <span id="spanNumeroDocumentoAntecipaPagamento"></span>
+                    <br />
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <b>Centro De Custo:</b>
+                    <span id="spanCentroDeCustoAntecipaPagamento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Valor:</b>
+                    <span id="spanValorAntecipaPagamento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Tipo de Movimento de Origem: </b>
+                    <span id="spanTipoMovimento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Data Criação: </b>
+                    <span id="spanDataCriaPagam"></span>
+                    <br />
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <b>Data Emissão: </b>
+                    <span id="spanDataEmissPagam"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Diferença entre Entrada e Criação: </b>
+                    <span id="spanDiferncaDatasPagam"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Data Previsão de Baixa: </b>
+                    <span id="spanDataVencimento"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="LabelData">Data para Alteração</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" id="data_alteracao" name="data_alteracao"
+                      class="data_alteracao form-control InputPagamentoNotasFiscais" style="color: red" />
                   </div>
                 </div>
               </div>
             </div>
-            <div id="divAntecipaAluguel" style="display: none">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h3 class="panel-title">
-                        Solicitação Antecipação Aluguel
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      id="AluguelValidada"
-                      style="color: #00c900; display: none"
-                    >
-                      <h3 class="panel-title">
-                        Solicitação Validada pelo Coordenador Operacional
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      id="AluguelNaoValidada"
-                      style="color: #830000; display: none"
-                    >
-                      <h3 class="panel-title">
-                        Solicitação Não Validada pelo Coordenador Operacional
-                      </h3>
-                    </div>
+          </div>
+          <div id="divAntecipaAluguel" style="display: none">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="panel-title">
+                      Solicitação Antecipação Aluguel
+                    </h3>
+                  </div>
+                  <div class="col-md-6" id="AluguelValidada" style="color: #00c900; display: none">
+                    <h3 class="panel-title">
+                      Solicitação Validada pelo Coordenador Operacional
+                    </h3>
+                  </div>
+                  <div class="col-md-6" id="AluguelNaoValidada" style="color: #830000; display: none">
+                    <h3 class="panel-title">
+                      Solicitação Não Validada pelo Coordenador Operacional
+                    </h3>
                   </div>
                 </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-12 form-input">
-                      <label
-                      class="popoverDicaIndetificadorMovimento"
-                      data-toggle="popover"
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12 form-input">
+                    <label class="popoverDicaIndetificadorMovimento" data-toggle="popover"
                       data-content="<div><b>No RM, o Identificador do Movimento estará localizado dentro do Movimento, na parte superior da tela, como indicado na imagem abaixo.</b><img src='http://fluig.castilho.com.br:1010/volume/stream/Rmx1aWc=/P3Q9MSZ2b2w9RGVmYXVsdCZpZD03MjcwNjQmdmVyPTEwMDEmZmlsZT1pbWFnZS5wbmcmY3JjPTM0MDUxNzg4NCZzaXplPTAuMDM2Mjk4JnVJZD0xNDUmZlNJZD0xJnVTSWQ9MSZkPWZhbHNlJnRrbj0mcHVibGljVXJsPWZhbHNl.png' height='300px' width:'auto'></div>"
-                      data-original-title="Popover title"
-                  >
+                      data-original-title="Popover title">
                       Identificador do Movimento:
                       <strong class="strongAlert">*</strong>
                       <i class="flaticon flaticon-info icon-sm" aria-hidden="true"></i>
-                  </label>
-                      <input
-                        type="text"
-                        id="IdentificadorMovAlug"
-                        name="IdentificadorMovAlug"
-                        class="form-control InputPagamentoAluguel"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
+                    </label>
+                    <input type="text" id="IdentificadorMovAlug" name="IdentificadorMovAlug"
+                      class="form-control InputPagamentoAluguel" />
+                    <div></div>
+                    <br />
                   </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <b>Razão Social:</b>
-                      <span id="spanRazaoSocialAntecipaAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>CNPJ:</b>
-                      <span id="spanCNPJAntecipaAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Clifor:</b>
-                      <span id="spanCliforAntecipaAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Numero Documento:</b>
-                      <span id="spanNumeroDocumentoAntecipaAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <b>Razão Social:</b>
+                    <span id="spanRazaoSocialAntecipaAluguel"></span>
+                    <br />
+                    <br />
                   </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <b>Centro De Custo:</b>
-                      <span id="spanCentroDeCustoAntecipaAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Tipo de Movimento de Origem: </b>
-                      <span id="spanTipoMovimentoAlug"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Valor:</b>
-                      <span id="spanValorAntecipaAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Data Criação: </b>
-                      <span id="spanDataCriaAlug"></span>
-                      <br />
-                      <br />
-                    </div>
+                  <div class="col-md-3">
+                    <b>CNPJ:</b>
+                    <span id="spanCNPJAntecipaAluguel"></span>
+                    <br />
+                    <br />
                   </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <b>Data Emissão: </b>
-                      <span id="spanDataEmissAlug"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Diferença entre Entrada e Criação: </b>
-                      <span id="spanDiferncaDatas"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <b>Data Previsão de Baixa: </b>
-                      <span id="spanDataVencimentoAluguel"></span>
-                      <br />
-                      <br />
-                    </div>
-                    <div class="col-md-3">
-                      <label for="LabelData">Data para Alteração</label>
-                      <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        id="data_alteracaoAluguel"
-                        name="data_alteracaoAluguel"
-                        class="data_alteracaoAluguel InputPagamentoAluguel form-control"
-                        style="color: red"
-                      />
-                    </div>
+                  <div class="col-md-3">
+                    <b>Clifor:</b>
+                    <span id="spanCliforAntecipaAluguel"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Numero Documento:</b>
+                    <span id="spanNumeroDocumentoAntecipaAluguel"></span>
+                    <br />
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <b>Centro De Custo:</b>
+                    <span id="spanCentroDeCustoAntecipaAluguel"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Tipo de Movimento de Origem: </b>
+                    <span id="spanTipoMovimentoAlug"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Valor:</b>
+                    <span id="spanValorAntecipaAluguel"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Data Criação: </b>
+                    <span id="spanDataCriaAlug"></span>
+                    <br />
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <b>Data Emissão: </b>
+                    <span id="spanDataEmissAlug"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Diferença entre Entrada e Criação: </b>
+                    <span id="spanDiferncaDatas"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <b>Data Previsão de Baixa: </b>
+                    <span id="spanDataVencimentoAluguel"></span>
+                    <br />
+                    <br />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="LabelData">Data para Alteração</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" id="data_alteracaoAluguel" name="data_alteracaoAluguel"
+                      class="data_alteracaoAluguel InputPagamentoAluguel form-control" style="color: red" />
                   </div>
                 </div>
               </div>
             </div>
-            <div id="divAdiantamentoFornecedor" style="display: none">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h3 class="panel-title">
-                    Solicitação de Adiantamento de Pagamento de Fornecedores
-                  </h3>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-6 form-input">
-                      <label>Fornecedor:</label>
-                      <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        list="datalistFornecedor"
-                        id="NomeECnpjFornecedor"
-                        name="NomeECnpjFornecedor"
-                        class="form-control InputAdiantamentoFornecedor"
-                        placeholder="CNPJ - Nome Fornecedor"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
-                    <div class="col-md-6 form-input">
-                      <label>Centro de Custo:</label>
-                      <strong class="strongAlert">*</strong>
-                      <select
-                        type="text"
-                        id="CentroDeCustoAdiantFornece"
-                        name="CentroDeCustoAdiantFornece"
-                        class="form-control"
-                      ></select>
-                      <div id="SibCCustoAdiant"></div>
-                      <br />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3 form-input">
-                      <label>Departamento:</label>
-                      <strong class="strongAlert">*</strong>
-                      <select
-                        type="text"
-                        id="DptoAdiantamentoFornece"
-                        name="DptoAdiantamentoFornece"
-                        class="form-control"
-                      ></select>
-                      <div id="SibDptoAdiant"></div>
-                      <br />
-                    </div>
-                    <div class="col-md-3 form-input">
-                      <label>Data para Pagamento:</label>
-                      <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        id="DataSolicAdiantamento"
-                        name="DataSolicAdiantamento"
-                        class="form-control InputAdiantamentoFornecedor"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
-                    <div class="col-md-3 form-input">
-                      <label>Valor:</label>
-                      <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        id="ValorAdiantamentoFornece"
-                        name="ValorAdiantamentoFornece"
-                        class="form-control InputAdiantamentoFornecedor"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
-                    <div class="col-md-3 form-input">
-                      <label>Forma de Pagamento:</label>
-                      <strong class="strongAlert">*</strong>
-                      <select
-                        type="text"
-                        id="FormaPgtoFornece"
-                        name="FormaPgtoFornece"
-                        class="form-control InputAdiantamentoFornecedor"
-                      >
-                        <option value=""></option>
-                        <option value="001 - Cheque Curitiba">
-                          001 - Cheque Curitiba
-                        </option>
-                        <option value="009 - Depósito">009 - Depósito</option>
-                      </select>
-                      <div></div>
-                      <br />
-                    </div>
-                  </div>
-                  <div
-                    class="panel panel-primary"
-                    id="divInformacoesDeposito"
-                    style="display: none"
-                  >
-                    <div class="panel-heading">
-                      <div class="row">
-                        <div class="col-md-10">
-                          <h3 class="panel-title">Informações para Depósito</h3>
-                        </div>
-                        <div id="botaoAtualizar" class="col-md-1" style="display: none;">
-                          <button class="btn btn-success">Atualizar Dados</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="panel-body">
-                      <div
-                        class="form-input"
-                        id="FornecedorExistente"
-                        style="display: none"
-                      >
-                        <div class="row">
-                          <div class="col-md-3">
-                            <b>Número Banco:</b>
-                            <span
-                              id="spanNumeroBancoFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanNumeroBancoFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                          <div class="col-md-3">
-                            <b>Código Agência:</b>
-                            <span
-                              id="spanCodigoAgenciaFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanCodigoAgenciaFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                          <div class="col-md-3">
-                            <b>Digito Agência:</b>
-                            <span
-                              id="spanDigitoAgenciaFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanDigitoAgenciaFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                          <div class="col-md-3">
-                            <b>Conta Corrente:</b>
-                            <span
-                              id="spanContaCorrenteFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanContaCorrenteFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-3">
-                            <b>Digito Conta:</b>
-                            <span
-                              id="spanDigtoContaFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanDigtoContaFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                          <div class="col-md-3">
-                            <b>Tipo Conta:</b>
-                            <span
-                              id="spanTipoContaFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanTipoContaFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                          <div class="col-md-3">
-                            <b>Favorecido:</b>
-                            <span
-                              id="spanFavorecidoFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanFavorecidoFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                          <div class="col-md-3">
-                            <b>CNPJ/CPF do Favorecido:</b>
-                            <span
-                              id="spanCNPJFornecedor"
-                              class="SpanPagamentoAdiantamentoFornecedor spanCNPJFornecedor"
-                            ></span>
-                            <br />
-                            <br />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          </div>
+          <div id="divAdiantamentoFornecedor" style="display: none">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  Solicitação de Adiantamento de Pagamento de Fornecedores
+                </h3>
               </div>
-            </div>
-            <div id="divAdiantamentoViagem" style="display: none">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h3 class="panel-title">
-                        Solicitação para Antecipação de Adiantamento de Viagem
-                        Fiscais
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      id="ViagemValidada"
-                      style="color: #00c900; display: none"
-                    >
-                      <h3 class="panel-title">
-                        Solicitação Validada pelo Coordenador Operacional
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      id="ViagemNaoValidada"
-                      style="color: #830000; display: none"
-                    >
-                      <h3 class="panel-title">
-                        Solicitação Não Validada pelo Coordenador Operacional
-                      </h3>
-                    </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-6 form-input">
+                    <label>Fornecedor:</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" list="datalistFornecedor" id="NomeECnpjFornecedor" name="NomeECnpjFornecedor"
+                      class="form-control InputAdiantamentoFornecedor" placeholder="CNPJ - Nome Fornecedor" />
+                    <div></div>
+                    <br />
+                  </div>
+                  <div class="col-md-6 form-input">
+                    <label>Centro de Custo:</label>
+                    <strong class="strongAlert">*</strong>
+                    <select type="text" id="CentroDeCustoAdiantFornece" name="CentroDeCustoAdiantFornece"
+                      class="form-control"></select>
+                    <div id="SibCCustoAdiant"></div>
+                    <br />
                   </div>
                 </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-6 form-input">
-                      <label>Centro de Custo:</label>
-                      <strong class="strongAlert">*</strong>
-                      <select
-                        type="text"
-                        id="CentroDeCustoAdiantViagem"
-                        name="CentroDeCustoAdiantViagem"
-                        class="form-control InputAdiantamentoViagem"
-                      ></select>
-                      <div id="SibCCustoViagem"></div>
-                      <br />
-                    </div>
-                    <div class="col-md-6 form-input">
-                      <label>Departamento:</label>
-                      <strong class="strongAlert">*</strong>
-                      <select
-                        type="text"
-                        id="DptoAdiantamentoViagem"
-                        name="DptoAdiantamentoViagem"
-                        class="form-control InputAdiantamentoViagem"
-                      ></select>
-                      <div id="SibDptoViagem"></div>
-                      <br />
+                <div class="row">
+                  <div class="col-md-3 form-input">
+                    <label>Departamento:</label>
+                    <strong class="strongAlert">*</strong>
+                    <select type="text" id="DptoAdiantamentoFornece" name="DptoAdiantamentoFornece"
+                      class="form-control"></select>
+                    <div id="SibDptoAdiant"></div>
+                    <br />
+                  </div>
+                  <div class="col-md-3 form-input">
+                    <label>Data para Pagamento:</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" id="DataSolicAdiantamento" name="DataSolicAdiantamento"
+                      class="form-control InputAdiantamentoFornecedor" />
+                    <div></div>
+                    <br />
+                  </div>
+                  <div class="col-md-3 form-input">
+                    <label>Valor:</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" id="ValorAdiantamentoFornece" name="ValorAdiantamentoFornece"
+                      class="form-control InputAdiantamentoFornecedor" />
+                    <div></div>
+                    <br />
+                  </div>
+                  <div class="col-md-3 form-input">
+                    <label>Forma de Pagamento:</label>
+                    <strong class="strongAlert">*</strong>
+                    <select type="text" id="FormaPgtoFornece" name="FormaPgtoFornece"
+                      class="form-control InputAdiantamentoFornecedor">
+                      <option value=""></option>
+                      <option value="001 - Cheque Curitiba">
+                        001 - Cheque Curitiba
+                      </option>
+                      <option value="009 - Depósito">009 - Depósito</option>
+                    </select>
+                    <div></div>
+                    <br />
+                  </div>
+                </div>
+                <div class="panel panel-primary" id="divInformacoesDeposito" style="display: none">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <h3 class="panel-title">Informações para Depósito</h3>
+                      </div>
+                      <div id="botaoAtualizar" class="col-md-1" style="display: none;">
+                        <button class="btn btn-success">Atualizar Dados</button>
+                      </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6 form-input">
-                      <label>Valor:</label>
-                      <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        id="ValorAdiantamentoViagem"
-                        name="ValorAdiantamentoViagem"
-                        class="form-control InputAdiantamentoViagem"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
-                    <div class="col-md-6 form-input">
-                      <label>Data Solicitada:</label>
-                      <strong class="strongAlert">*</strong>
-                      <input
-                        type="text"
-                        id="DataSolicAdiantamentoViagem"
-                        name="DataSolicAdiantamentoViagem"
-                        class="form-control InputAdiantamentoViagem"
-                      />
-                      <div></div>
-                      <br />
-                    </div>
-                  </div>
-                  <div class="panel panel-primary">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Dados para a transferência</h3>
-                      <h3 class="panel-title" style="color: darkred">
-                        (Favor digitar os dados da Obra, para qual a
-                        transferência será feita)
-                      </h3>
-                    </div>
-                    <div class="panel-body">
+                  <div class="panel-body">
+                    <div class="form-input" id="FornecedorExistente" style="display: none">
                       <div class="row">
-                        <div class="col-md-4">
-                          <b>Banco:</b>
-                          <strong class="strongAlert">*</strong>
-                          <input
-                            type="text"
-                            id="BancoObraAdiantViagem"
-                            name="BancoObraAdiantViagem"
-                            class="form-control InputAdiantamentoViagem"
-                          />
-                          <div></div>
+                        <div class="col-md-3">
+                          <b>Número Banco:</b>
+                          <span id="spanNumeroBancoFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanNumeroBancoFornecedor"></span>
+                          <br />
                           <br />
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                          <b>Código Agência:</b>
+                          <span id="spanCodigoAgenciaFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanCodigoAgenciaFornecedor"></span>
+                          <br />
+                          <br />
+                        </div>
+                        <div class="col-md-3">
+                          <b>Digito Agência:</b>
+                          <span id="spanDigitoAgenciaFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanDigitoAgenciaFornecedor"></span>
+                          <br />
+                          <br />
+                        </div>
+                        <div class="col-md-3">
                           <b>Conta Corrente:</b>
-                          <strong class="strongAlert">*</strong>
-                          <input
-                            type="text"
-                            id="CCorrenteObraAdiantViagem"
-                            name="CCorrenteObraAdiantViagem"
-                            class="form-control InputAdiantamentoViagem"
-                          />
-                          <div></div>
+                          <span id="spanContaCorrenteFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanContaCorrenteFornecedor"></span>
+                          <br />
                           <br />
                         </div>
-                        <div class="col-md-4">
-                          <b>Agência:</b>
-                          <strong class="strongAlert">*</strong>
-                          <input
-                            type="text"
-                            id="AgenciaObraAdiantViagem"
-                            name="AgenciaObraAdiantViagem"
-                            class="form-control InputAdiantamentoViagem"
-                          />
-                          <div></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <b>Digito Conta:</b>
+                          <span id="spanDigtoContaFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanDigtoContaFornecedor"></span>
+                          <br />
+                          <br />
+                        </div>
+                        <div class="col-md-3">
+                          <b>Tipo Conta:</b>
+                          <span id="spanTipoContaFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanTipoContaFornecedor"></span>
+                          <br />
+                          <br />
+                        </div>
+                        <div class="col-md-3">
+                          <b>Favorecido:</b>
+                          <span id="spanFavorecidoFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanFavorecidoFornecedor"></span>
+                          <br />
+                          <br />
+                        </div>
+                        <div class="col-md-3">
+                          <b>CNPJ/CPF do Favorecido:</b>
+                          <span id="spanCNPJFornecedor"
+                            class="SpanPagamentoAdiantamentoFornecedor spanCNPJFornecedor"></span>
+                          <br />
                           <br />
                         </div>
                       </div>
@@ -716,168 +442,227 @@
                 </div>
               </div>
             </div>
-            <div class="form-input">
-              <label>Solicitante:</label>
-              <strong class="strongAlert">*</strong>
-              <input
-                name="usuario"
-                id="usuario"
-                class="form-control usuario info-chamado"
-              />
-              <div></div>
-              <br />
-            </div>
-            <div class="form-input">
-              <label for="LabelJustificativa">Justificativa:</label>
-              <strong class="strongAlert">*</strong>
-              <textarea
-                name="Justificativa"
-                id="Justificativa"
-                class="form-control info-chamado"
-                style="resize: vertical"
-                placeholder="Insira a justificativa para alteração de prazo"
-              ></textarea>
-              <div></div>
-              <br />
-            </div>
-            <div class="form-input">
-              <label
-                >Email de outros Usuários:
-                <i
-                  class="flaticon flaticon-info icon-sm"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="Endereços de e-mail incluidos na notificação enviada por e-mail. (Separados por ;)"
-                ></i
-              ></label>
-              <input type="text" class="form-control" name="email" id="email" />
-              <div></div>
-              <br />
-            </div>
           </div>
-        </div>
-        <div class="panel panel-primary" id="Valida" style="display: none">
-          <div class="panel-heading" text-align="center">
-            <h3 class="panel-title">Validação</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-3" style="padding-right: 28%"></div>
-              <div class="col-md-4" style="text-align: center">
-                <label for="LabelValidaSolicitacao">Validar Solicitação</label
-                ><br />
-                <input
-                  type="radio"
-                  name="validar"
-                  class="validar"
-                  id="validar"
-                  value="sim"
-                />
-                Sim<br />
-                <input
-                  type="radio"
-                  name="validar"
-                  class="validar"
-                  id="validar"
-                  value="nao"
-                />
-                Não<br />
+          <div id="divAdiantamentoViagem" style="display: none">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h3 class="panel-title">
+                      Solicitação para Antecipação de Adiantamento de Viagem
+                      Fiscais
+                    </h3>
+                  </div>
+                  <div class="col-md-6" id="ViagemValidada" style="color: #00c900; display: none">
+                    <h3 class="panel-title">
+                      Solicitação Validada pelo Coordenador Operacional
+                    </h3>
+                  </div>
+                  <div class="col-md-6" id="ViagemNaoValidada" style="color: #830000; display: none">
+                    <h3 class="panel-title">
+                      Solicitação Não Validada pelo Coordenador Operacional
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-6 form-input">
+                    <label>Centro de Custo:</label>
+                    <strong class="strongAlert">*</strong>
+                    <select type="text" id="CentroDeCustoAdiantViagem" name="CentroDeCustoAdiantViagem"
+                      class="form-control InputAdiantamentoViagem"></select>
+                    <div id="SibCCustoViagem"></div>
+                    <br />
+                  </div>
+                  <div class="col-md-6 form-input">
+                    <label>Departamento:</label>
+                    <strong class="strongAlert">*</strong>
+                    <select type="text" id="DptoAdiantamentoViagem" name="DptoAdiantamentoViagem"
+                      class="form-control InputAdiantamentoViagem"></select>
+                    <div id="SibDptoViagem"></div>
+                    <br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 form-input">
+                    <label>Valor:</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" id="ValorAdiantamentoViagem" name="ValorAdiantamentoViagem"
+                      class="form-control InputAdiantamentoViagem" />
+                    <div></div>
+                    <br />
+                  </div>
+                  <div class="col-md-6 form-input">
+                    <label>Data Solicitada:</label>
+                    <strong class="strongAlert">*</strong>
+                    <input type="text" id="DataSolicAdiantamentoViagem" name="DataSolicAdiantamentoViagem"
+                      class="form-control InputAdiantamentoViagem" />
+                    <div></div>
+                    <br />
+                  </div>
+                </div>
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Dados para a transferência</h3>
+                    <h3 class="panel-title" style="color: darkred">
+                      (Favor digitar os dados da Obra, para qual a
+                      transferência será feita)
+                    </h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <b>Banco:</b>
+                        <strong class="strongAlert">*</strong>
+                        <input type="text" id="BancoObraAdiantViagem" name="BancoObraAdiantViagem"
+                          class="form-control InputAdiantamentoViagem" />
+                        <div></div>
+                        <br />
+                      </div>
+                      <div class="col-md-4">
+                        <b>Conta Corrente:</b>
+                        <strong class="strongAlert">*</strong>
+                        <input type="text" id="CCorrenteObraAdiantViagem" name="CCorrenteObraAdiantViagem"
+                          class="form-control InputAdiantamentoViagem" />
+                        <div></div>
+                        <br />
+                      </div>
+                      <div class="col-md-4">
+                        <b>Agência:</b>
+                        <strong class="strongAlert">*</strong>
+                        <input type="text" id="AgenciaObraAdiantViagem" name="AgenciaObraAdiantViagem"
+                          class="form-control InputAdiantamentoViagem" />
+                        <div></div>
+                        <br />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <br />
-        </div>
-        <datalist id="datalistFornecedor"> </datalist>
-        <div class="panel panel-primary" id="Aprov" style="display: none">
-          <div class="panel-heading" text-align="center">
-            <h3 class="panel-title">Aprovação</h3>
+          <div class="form-input">
+            <label>Solicitante:</label>
+            <strong class="strongAlert">*</strong>
+            <input name="usuario" id="usuario" class="form-control usuario info-chamado" />
+            <div></div>
+            <br />
           </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-3" style="padding-right: 28%"></div>
-              <div class="col-md-4" style="text-align: center">
-                <label for="LabelAprovSolicitacao"
-                  >Deseja aprovar a Solicitação?</label
-                ><br />
-                <input
-                  type="radio"
-                  name="aprovar"
-                  class="aprovar"
-                  id="aprovar"
-                  value="sim"
-                />
-                Sim<br />
-                <input
-                  type="radio"
-                  name="aprovar"
-                  class="aprovar"
-                  id="aprovar"
-                  value="nao"
-                />
-                Não<br />
-              </div>
-            </div>
+          <div class="form-input">
+            <label for="LabelJustificativa">Justificativa:</label>
+            <strong class="strongAlert">*</strong>
+            <textarea name="Justificativa" id="Justificativa" class="form-control info-chamado" style="resize: vertical"
+              placeholder="Insira a justificativa para alteração de prazo"></textarea>
+            <div></div>
+            <br />
           </div>
-
-          <br />
-          <div style="display: none">
-            <input type="hidden" id="solicitante" name="solicitante" />
-            <input type="hidden" id="UsuarioRR" name="UsuarioRR" />
-            <input type="hidden" id="opcaoSelec" name="opcaoSelec" />
-            <input type="hidden" id="opcaoValida" name="opcaoValida" />
-            <input type="hidden" id="mail" name="mail" />
-            <input type="hidden" id="atividade" name="atividade" />
-            <input type="hidden" id="formMode" name="formMode" />
-            <input type="hidden" id="numProces" name="numProces" />
-            <input type="hidden" id="verificaEmail" name="verificaEmail" />
-            <input type="hidden" id="emailGerenteContratos" name="emailGerenteContratos" />
-            <input type="hidden" id="emailCoordenadorOperacional" name="emailCoordenadorOperacional" />
-            <input type="hidden" id="mailFinal" name="mailFinal" />
-            <input type="hidden" id="Mobile" name="Mobile" />
-            <input type="hidden" id="DataDeHoje" name="DataDeHoje" />
-            <input type="hidden" id="CategoriaChamado" name="CategoriaChamado" />
-            <input type="hidden" id="Perm" name="Perm" />
-            <input type="hidden" id="TMVLan" name="TMVLan" />
-            <input type="hidden" id="CodCCusto" name="CodCCusto" />
-            <input type="hidden" id="NumeroCCusto" name="NumeroCCusto" />
-            <input type="hidden" id="ValorOriginal" name="ValorOriginal" />
-            <input type="hidden" id="diferenca" name="diferenca" />
-            <input type="hidden" id="CodColigada" name="CodColigada" value="1" />
-            <input type="hidden" id="CodCfo" name="CodCfo" />
-            <input type="hidden" id="HiddenCNPJ" name="HiddenCNPJ" />
-            <input type="hidden" id="descricaoPag" name="descricaoPag" />
-            <input type="hidden" id="bancoPag" name="bancoPag" />
-            <input type="hidden" id="agenciaPag" name="agenciaPag" />
-            <input type="hidden" id="digAgenciaPag" name="digAgenciaPag" />
-            <input type="hidden" id="contaPag" name="contaPag" />
-            <input type="hidden" id="digContaPag" name="digContaPag" />
-            <input type="hidden" id="tipoPag" name="tipoPag" />
-            <input type="hidden" id="favorecidoPag" name="favorecidoPag" />
-            <input type="hidden" id="cpfCnpjPag" name="cpfCnpjPag" />
-            <input type="hidden" id="idPgto" name="idPgto" />
-            <input type="hidden" id="atualizaBancoForn" name="atualizaBancoForn" value="0" />
-            <input type="hidden" id="CentroCustoAdiantamento" name="CentroCustoAdiantamento"/>
-            <input type="hidden" id="DepartamentoAdiantamento" name="DepartamentoAdiantamento"/>
-            <input type="hidden" id="jsonDestinoPagamento" name="jsonDestinoPagamento"/>
+          <div class="form-input">
+            <label>Email de outros Usuários:
+              <i class="flaticon flaticon-info icon-sm" data-toggle="tooltip" data-placement="top"
+                title="Endereços de e-mail incluidos na notificação enviada por e-mail. (Separados por ;)"></i></label>
+            <input type="text" class="form-control" name="email" id="email" />
+            <div></div>
+            <br />
           </div>
-          <script>
-            var beforeSendValidate = function (numState, nextState) {
-              var atividade = $("#atividade").val();
-              $("#mailFinal").val($("mail").val());
-              var resultado = ValidaCampos();
-              if (atividade == 0 || atividade == 4) {
-                //console.log("Entrou no If");
-                if (resultado == true) {
-                  var categoria = $("#CategoriaAlteracao").val();
-                  CriaJson(categoria);
-                }
-              }
-              return resultado;
-            };
-          </script>
         </div>
       </div>
-    </form>
-  </body>
+      <div class="panel panel-primary" id="Valida" style="display: none">
+        <div class="panel-heading" text-align="center">
+          <h3 class="panel-title">Validação</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3" style="padding-right: 28%"></div>
+            <div class="col-md-4" style="text-align: center">
+              <label for="LabelValidaSolicitacao">Validar Solicitação</label><br />
+              <input type="radio" name="validar" class="validar" id="validar" value="sim" />
+              Sim<br />
+              <input type="radio" name="validar" class="validar" id="validar" value="nao" />
+              Não<br />
+            </div>
+          </div>
+        </div>
+
+        <br />
+      </div>
+      <datalist id="datalistFornecedor"> </datalist>
+      <div class="panel panel-primary" id="Aprov" style="display: none">
+        <div class="panel-heading" text-align="center">
+          <h3 class="panel-title">Aprovação</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3" style="padding-right: 28%"></div>
+            <div class="col-md-4" style="text-align: center">
+              <label for="LabelAprovSolicitacao">Deseja aprovar a Solicitação?</label><br />
+              <input type="radio" name="aprovar" class="aprovar" id="aprovar" value="sim" />
+              Sim<br />
+              <input type="radio" name="aprovar" class="aprovar" id="aprovar" value="nao" />
+              Não<br />
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <div style="display: none">
+          <input type="hidden" id="solicitante" name="solicitante" />
+          <input type="hidden" id="UsuarioRR" name="UsuarioRR" />
+          <input type="hidden" id="opcaoSelec" name="opcaoSelec" />
+          <input type="hidden" id="opcaoValida" name="opcaoValida" />
+          <input type="hidden" id="mail" name="mail" />
+          <input type="hidden" id="atividade" name="atividade" />
+          <input type="hidden" id="formMode" name="formMode" />
+          <input type="hidden" id="numProces" name="numProces" />
+          <input type="hidden" id="verificaEmail" name="verificaEmail" />
+          <input type="hidden" id="emailGerenteContratos" name="emailGerenteContratos" />
+          <input type="hidden" id="emailCoordenadorOperacional" name="emailCoordenadorOperacional" />
+          <input type="hidden" id="mailFinal" name="mailFinal" />
+          <input type="hidden" id="Mobile" name="Mobile" />
+          <input type="hidden" id="DataDeHoje" name="DataDeHoje" />
+          <input type="hidden" id="CategoriaChamado" name="CategoriaChamado" />
+          <input type="hidden" id="Perm" name="Perm" />
+          <input type="hidden" id="TMVLan" name="TMVLan" />
+          <input type="hidden" id="CodCCusto" name="CodCCusto" />
+          <input type="hidden" id="NumeroCCusto" name="NumeroCCusto" />
+          <input type="hidden" id="ValorOriginal" name="ValorOriginal" />
+          <input type="hidden" id="diferenca" name="diferenca" />
+          <input type="hidden" id="CodColigada" name="CodColigada" value="1" />
+          <input type="hidden" id="CodCfo" name="CodCfo" />
+          <input type="hidden" id="HiddenCNPJ" name="HiddenCNPJ" />
+          <input type="hidden" id="descricaoPag" name="descricaoPag" />
+          <input type="hidden" id="bancoPag" name="bancoPag" />
+          <input type="hidden" id="agenciaPag" name="agenciaPag" />
+          <input type="hidden" id="digAgenciaPag" name="digAgenciaPag" />
+          <input type="hidden" id="contaPag" name="contaPag" />
+          <input type="hidden" id="digContaPag" name="digContaPag" />
+          <input type="hidden" id="tipoPag" name="tipoPag" />
+          <input type="hidden" id="favorecidoPag" name="favorecidoPag" />
+          <input type="hidden" id="cpfCnpjPag" name="cpfCnpjPag" />
+          <input type="hidden" id="idPgto" name="idPgto" />
+          <input type="hidden" id="atualizaBancoForn" name="atualizaBancoForn" value="0" />
+          <input type="hidden" id="CentroCustoAdiantamento" name="CentroCustoAdiantamento" />
+          <input type="hidden" id="DepartamentoAdiantamento" name="DepartamentoAdiantamento" />
+          <input type="hidden" id="jsonDestinoPagamento" name="jsonDestinoPagamento" />
+        </div>
+        <script>
+          var beforeSendValidate = function (numState, nextState) {
+            var atividade = $("#atividade").val();
+            $("#mailFinal").val($("mail").val());
+            var resultado = ValidaCampos();
+            if (atividade == 0 || atividade == 4) {
+              //console.log("Entrou no If");
+              if (resultado == true) {
+                var categoria = $("#CategoriaAlteracao").val();
+                CriaJson(categoria);
+              }
+            }
+            return resultado;
+          };
+        </script>
+      </div>
+    </div>
+  </form>
+</body>
+
 </html>
