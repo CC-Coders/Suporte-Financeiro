@@ -43,7 +43,7 @@ function createDataset(fields, constraints, sortFields) {
 	   	var resultado = authService.saveRecord(pDataServerName,pXML,context);		
 		
 	   	// Retorno correto (CODCOLIGADA;IDMOV) Exemplo: "1;758699"
-	   	if (resultado.indexOf(";") == 1) {
+	   	if (resultado.split(";").length == 2) {
 		   	var res = resultado.split(';');
 		   	dataset.addRow(new Array("true","Movimento alterado com sucesso",res[1]));	   		
 	   	}
