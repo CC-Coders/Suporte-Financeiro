@@ -290,4 +290,13 @@ $(document).ready(function () {
       $("#divAdiantamentoViagem").show();
     }
   }
-})
+
+  bindings();
+});
+
+function bindings(){
+  $("#coligadaMovAlug").on("change", function(){
+    //Copia o valor da Coligada selecionada pro Campo CodColigada usado em Integrações e no Mecanismo do Aprovador
+    $("#CodColigada").val($(this).val());
+  });
+}
