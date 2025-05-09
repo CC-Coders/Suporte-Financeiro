@@ -73,8 +73,9 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
         }
         else if (CategoriaChamado == "Antecipação de Aluguel") {
             var c1 = DatasetFactory.createConstraint("IDMOV", hAPI.getCardValue("IdentificadorMovAlug"), hAPI.getCardValue("IdentificadorMovAlug"), ConstraintType.MUST);
+            var c3 = DatasetFactory.createConstraint("CODCOLIGADA", hAPI.getCardValue("coligadaMovAlug"), hAPI.getCardValue("coligadaMovAlug"), ConstraintType.MUST);
             var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST)
-            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2], null)
+            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2,c3], null)
 
             var newXml = new String;
             newXml += "<MovMovimento>";
@@ -95,12 +96,14 @@ function beforeTaskSave(colleagueId, nextSequenceId, userList) {
             var retorno = DatasetFactory.getDataset("AtualizaMovimentoFinanceiro", null, constraints, null);
 
 
-            //log.info("RETORNO = " + retorno.values[0][1]);
+            log.info("RETORNO = " + retorno.values[0][1]);
+            log.dir(retorno );
 
             if (!retorno || retorno == "" || retorno == null) {
                 throw "Houve um erro na comunicação com o webservice. Tente novamente!";
             }
             else {
+
                 if (retorno.values[0][0] == "false") {
                     throw "Não foi possível atualizar o movimento. Motivo: " + retorno.values[0][1] + ". Favor verificar as informações ou entrar em contato com o administrador do sistema.";
                 }
@@ -173,8 +176,9 @@ function EnviaNotificacao(numSolic) {
         }
         else if (hAPI.getCardValue("CategoriaAlteracao") == "Antecipação de Aluguel") {
             var c1 = DatasetFactory.createConstraint("IDMOV", hAPI.getCardValue("IdentificadorMovAlug"), hAPI.getCardValue("IdentificadorMovAlug"), ConstraintType.MUST);
+            var c3 = DatasetFactory.createConstraint("CODCOLIGADA", hAPI.getCardValue("coligadaMovAlug"), hAPI.getCardValue("coligadaMovAlug"), ConstraintType.MUST);
             var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST)
-            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2], null)
+            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2, c3], null)
 
             html +=
                 "<br>\
@@ -341,9 +345,10 @@ function EnviaNotificacaoAprovado(numSolic) {
                     }
         }
         else if (hAPI.getCardValue("CategoriaAlteracao") == "Antecipação de Aluguel") {
-            var c1 = DatasetFactory.createConstraint("IDMOV", hAPI.getCardValue("IdentificadorMovAlug"), hAPI.getCardValue("IdentificadorMovAlug"), ConstraintType.MUST);
+            var c1 = DatasetFactory.createConstraint("IDMOV", hAPI.getCardValue("IdentificadorMovAlug"), hAPI.getCardValue("coligadaMovAlug"), ConstraintType.MUST);
+            var c3 = DatasetFactory.createConstraint("CODCOLIGADA", hAPI.getCardValue("coligadaMovAlug"), hAPI.getCardValue("IdentificadorMovAlug"), ConstraintType.MUST);
             var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST)
-            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2], null)
+            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2,c3], null)
 
             html +=
                 "<br>\
@@ -506,8 +511,9 @@ function EnviaNotificacaoCancelada(numSolic) {
         }
         else if (hAPI.getCardValue("CategoriaAlteracao") == "Antecipação de Aluguel") {
             var c1 = DatasetFactory.createConstraint("IDMOV", hAPI.getCardValue("IdentificadorMovAlug"), hAPI.getCardValue("IdentificadorMovAlug"), ConstraintType.MUST);
-            var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST)
-            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2], null)
+            var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST);
+            var c3 = DatasetFactory.createConstraint("CODCOLIGADA", "coligadaMovAlug", "coligadaMovAlug", ConstraintType.MUST);
+            var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2, c3], null);
 
             var comentario = getValue("WKUserComment");
 

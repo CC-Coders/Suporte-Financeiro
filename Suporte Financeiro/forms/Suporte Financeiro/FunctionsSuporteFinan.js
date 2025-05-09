@@ -112,8 +112,8 @@ function FormataValorInserir(valor) {
 
 function BuscaLancamentos() {
     var c1 = DatasetFactory.createConstraint("colleagueId", $("#usuario").val(), $("#usuario").val(), ConstraintType.MUST);
-    //var c3 = DatasetFactory.createConstraint("groupId", "Administrador TI", "Administrador TI", ConstraintType.SHOULD);
-    var ds = DatasetFactory.getDataset("colleagueGroup", null, [c1], null);
+    var c2 = DatasetFactory.createConstraint("groupId", "Matriz", "Matriz", ConstraintType.SHOULD);
+    var ds = DatasetFactory.getDataset("colleagueGroup", null, [c1,c2], null);
     var constraints = [];
 
     if ($("#usuario").val() == 'alysson.silva1') {
@@ -121,7 +121,7 @@ function BuscaLancamentos() {
     }
 
     if ($("#usuario").val() == 'thalessa.tomm' || $("#usuario").val() == 'fernando.jarvorski' || $("#usuario").val() == 'naiara.pinto' || $("#usuario").val() == 'rodrigo.ramos' || $("#usuario").val() == 'roney.tomm'
-    || $("#usuario").val() == 'paulo.giovani' || $("#usuario").val() == 'kennedy.silva') {
+    || $("#usuario").val() == 'paulo.giovani' || $("#usuario").val() == 'kennedy.silva' || ds.values.length>0) {
         constraints.push(DatasetFactory.createConstraint("permissaoGeral", "true", "true", ConstraintType.MUST));
     }
     constraints.push(DatasetFactory.createConstraint("usuario", $("#usuario").val(), $("#usuario").val(), ConstraintType.MUST));
@@ -320,12 +320,12 @@ function VerificaExcecaoChefeDeEscritorio(DsFinal){
 function BuscaLancamentosAlug() {
 
     var c1 = DatasetFactory.createConstraint("colleagueId", $("#solicitante").val(), $("#solicitante").val(), ConstraintType.MUST);
-    //var c3 = DatasetFactory.createConstraint("groupId", "Administrador TI", "Administrador TI", ConstraintType.SHOULD);
+    var c2 = DatasetFactory.createConstraint("groupId", "Matriz", "Matriz", ConstraintType.SHOULD);
     var ds = DatasetFactory.getDataset("colleagueGroup", null, [c1], null);
     var constraints = [];
 
     if ($("#solicitante").val() == 'thalessa.tomm' || $("#solicitante").val() == 'fernando.jarvorski' || $("#solicitante").val() == 'rodrigo.ramos' ||  $("#solicitante").val() == 'naiara.pinto'
-    || $("#solicitante").val() == 'diretoria.financeira') {
+    || $("#solicitante").val() == 'diretoria.financeira' || ds.values.length>0) {
         constraints.push(DatasetFactory.createConstraint("permissaoGeral", "true", "true", ConstraintType.MUST));
     }
 
@@ -341,7 +341,8 @@ function BuscaLancamentosAlug() {
         var c1 = DatasetFactory.createConstraint("IDMOV", $("#IdentificadorMovAlug").val(), $("#IdentificadorMovAlug").val(), ConstraintType.MUST);
     }
     var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST)
-    var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2], null)
+    var c3 = DatasetFactory.createConstraint("CODCOLIGADA", $("#coligadaMovAlug").val(), $("#coligadaMovAlug").val(), ConstraintType.MUST)
+    var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2, c3], null)
     //console.log(Dataset)
     var DsFinal = Dataset.values
 
@@ -444,8 +445,9 @@ function AtribuiSuperiores() {
     }
     else if ($("#CategoriaAlteracao").val() == 'Antecipação de Aluguel') {
         var c1 = DatasetFactory.createConstraint("IDMOV", $("#IdentificadorMovAlug").val(), $("#IdentificadorMovAlug").val(), ConstraintType.MUST);
+        var c3 = DatasetFactory.createConstraint("codcoligada", $("#coligadaMovAlug").val(), $("#coligadaMovAlug").val(), ConstraintType.MUST);
         var c2 = DatasetFactory.createConstraint("OPERACAO", "PuxaMovimentoAluguel", "PuxaMovimentoAluguel", ConstraintType.MUST)
-        var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2], null)
+        var Dataset = DatasetFactory.getDataset("DatasetSuporteFinanceiro", null, [c1, c2,c3], null)
         var DsFinal = Dataset.values
         valorCodcoligada = DsFinal[0].CODCOLIGADA
     }
@@ -490,7 +492,7 @@ function AtribuiSuperiores() {
 }
 
 function BloqueiaCamposInfoChamado() {
-    $("#IdentificadorMov, #IdentificadorMovAlug, .info-chamado, .InputAdiantamentoFornecedor, .InputPagamentoAdiantamentoFornecedor, .InputAdiantamentoViagem").each(function () {
+    $("#IdentificadorMov, #IdentificadorMovAlug, #coligadaMovAlug, .info-chamado, .InputAdiantamentoFornecedor, .InputPagamentoAdiantamentoFornecedor, .InputAdiantamentoViagem").each(function () {
         var value = $(this).val();
         if (value !== null) {
             $(this).siblings("div:first").html(value.split("\n").join("<br>"));
